@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <style>
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- <div class="row">
+         <div class="col-sm-6 col-md-2">
+             <div class="thumbnail">
+                 <img src="../img/1.webp">
+                 <div class="caption">
+                     <p>[京东超市]拉菲传奇 法国波尔多AOC千红葡萄酒 原平井口</p>
+                     <p><b>￥298.00</b></p>
+                     <p><u>￥599.00</u></p>
+                 </div>
+             </div>
+         </div>
+     </div>-->
+</div>
+<script src="../js/jquery-1.10.2.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function(){
+        ajax("../data/1.json");
+       /* setTimeout(ajax("../data/2.json"),5000);*/
+        setTimeout(fun,1000);
+    });
+    function fun(){
+        $(".container").empty();
+        ajax("../data/3.json");
+    }
+    function  ajax(url){
+        $.ajax({
+            url:url,
+            type:"get",
+            success:function(data){
+                console.log(data);
+                var list="";
+                var pro=data.list;
+                for(var i=0;i<pro.length;i++){
+                    list+=' <div>\
+                            <div class=" col-md-4" id="'+pro[i].id+'">\
+                            <div class="thumbnail">\
+                            <img src="'+pro[i].src+'">\
+                            <div class="caption">\
+                            <p>'+pro[i].title+'</p>\
+                            <p><b>'+pro[i].price+'</b></p>\
+                            <p><u>'+pro[i].prePrice+'</u></p>\
+                            </div>\
+                            </div>\
+                            </div>\
+                            </div>'
+                }
+                $(".container").append(list);
+            }
+        });
+    }
+  /*  $(document).ready(function(){
+        $.ajax({
+            url:"../data/1.json",
+            type:"get",
+            success:function(data){
+                /!*console.log(data);*!/
+                var list="";
+                var pro=data.list;
+                for(var i=0;i<pro.length;i++){
+                    list+=' <div>\
+                            <div class=" col-md-4" id="'+pro[i].id+'">\
+                            <div class="thumbnail">\
+                            <img src="'+pro[i].src+'">\
+                            <div class="caption">\
+                            <p>'+pro[i].title+'</p>\
+                            <p><b>'+pro[i].price+'</b></p>\
+                            <p><u>'+pro[i].prePrice+'</u></p>\
+                            </div>\
+                            </div>\
+                            </div>\
+                            </div>'
+                }
+                $(".container").append(list);
+            }
+        })
+    })*/
+</script>
+</body>
+</html>
