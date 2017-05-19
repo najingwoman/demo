@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/News%20content.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link  rel="stylesheet" href="css/cooperative%20partner8.css">
+
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/html5shiv.min.js" type="text/javascript"></script>
+    <script src="http://g.tbcdn.cn/kissy/k/1.4.3/seed-min.js" data-config="{combine:true}" type="text/javascript"></script>
+    <script type="text/javascript" src="js/header.js"></script>
+    <style>
+
+    </style>
+</head>
+<body>
+<!--头部-->
+<div id="header"></div>
+<div class="zhengti">
+    <img src="img%20cooperative%20partner/hu.jpg" alt="" style="width: 100%">
+    <div class="container">
+        <h2 class="h2 text-center">合作伙伴</h2>
+        <p class="text-center">普讯人：敬业，用心工作，主动承担，言行一致</p>
+        <div class="div-p province1">
+            <div class="container1">
+
+            </div>
+            <!--<h2 class="h3">上海:</h2>-->
+
+        </div>
+
+
+    </div>
+</div>
+
+<div id="footer"></div>
+<script src="js/jquery-1.10.2.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script>$('#header').load('header.html');
+$('#footer').load('footer.html'); </script>
+<script>
+    $(document).ready(function(){
+        ajax("data/t.json");
+    });
+    function  ajax(url){
+        $.ajax({
+            url:url,
+            type:"get",
+            success:function(data){
+                var list="";
+                var pro=data.list;
+                var cssNew="";
+                for(var i=0;i<pro.length;i++){
+                        cssNew=pro[i].text;
+                        if(cssNew!=""){
+                            if(cssNew.charAt(1)=="a") {//块头
+                                list += ' <div class="row row-margin-top color' + cssNew.charAt(0) +  '" >'
+                            }
+                            if(cssNew.charAt(1)!="a" && cssNew.charAt(1)!="b" ) {//非块头和块尾
+                                list += ' <div class="col-md-3 text-center">\
+                                    <p>' + pro[i].text + '</p>\
+                                    </div>'
+                            }
+                            if(cssNew.charAt(1)=="b") {//块尾
+                                list += ' </div>'
+                            }
+                        }
+                       /* else {
+                            list += ' <div class="col-md-3 text-center">\
+                                        <p>' + pro[i].text + '</p>\
+                                        </div>'
+                        }*/
+                    }
+                $(".container1").append(list);
+
+            }
+
+        });
+    }
+</script>
+</body>
+</html>
